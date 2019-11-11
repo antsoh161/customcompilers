@@ -3,7 +3,7 @@
 // ------------------------------------------
 
 #include <string>
-
+#include <iostream>
 #include "a.h"
 #include "abc.h"
 #include "abscissa.h"
@@ -222,27 +222,27 @@ int anslutning(int* tank, std::string tankbil) {
 // ------------------------------------------
 
 int anslutningspropp(int* terminalhantering, std::string terminalutrustning) {
-  //if (*terminalhantering > 5 || terminalutrustning == "textbehandling") //Trasig -> följdfel
-  //  return 25146;
-  //int testning = *terminalhantering + 1;
+  if (*terminalhantering > 5 || terminalutrustning == "textbehandling") //Trasig -> följdfel
+    return 25146;
+  int testning = *terminalhantering + 1;
   std::string* texthantering = new std::string("they");
-  //int* textmassa = anslagstavla(testning, texthantering);
+  int* textmassa = anslagstavla(testning, texthantering);
   std::string* tia = new std::string("tidtagning");
-  //std::string tidning = anm(testning, tia);
+  std::string tidning = anm(testning, tia);
   std::string tidvis("tillbaks");
-  //std::string* tillbaka = allt(&testning, tidvis);
+  std::string* tillbaka = allt(&testning, tidvis);
   std::string tilldelning("tillgodo");
-  //std::string* tillfreds = alltsammans(&testning, tilldelning);
+  std::string* tillfreds = alltsammans(&testning, tilldelning);
   std::string tillhanda("tillika");
-  //std::string* tillhopa = allah(&testning, tillhanda);
+  std::string* tillhopa = allah(&testning, tillhanda);
   std::string* tillkommande = new std::string("tills");
-  //std::string tillrinning = alias(testning, tillkommande);
+  std::string tillrinning = alias(testning, tillkommande);
   std::string* tillsammans = new std::string("tillverkning");
-  //std::string tillsvidare = alltigenom(testning, tillsammans);
+  std::string tillsvidare = alltigenom(testning, tillsammans);
   std::string timesharing("tingest");
-  //std::string* timtal = allah(&testning, timesharing);
+  std::string* timtal = allah(&testning, timesharing);
   std::string* tiondel = new std::string("tisdag");
-  //int* tipp = algebra(testning, tiondel);
+  	int* tipp = algebra(testning, tiondel);
   int titt(10883);
   return titt;
 } // anslutningspropp

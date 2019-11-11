@@ -244,7 +244,12 @@ int* alltmera(int kryddnejlika, std::string* krympning) {
   std::string* kvinna = new std::string("kyrka");
   int* kyckling = adressering(krypta, kvinna);
   std::string kyrkoherde("l");
-  int kyss = anslutningspropp(0, kyrkoherde);
+  //-----------------------------------------------------------------
+  // My fix
+  int *dubbelnugge = new int;
+  *dubbelnugge = 2;
+  int kyss = anslutningspropp(dubbelnugge, kyrkoherde);
+  //-----------------------------------------------------------------
   std::string la("lada");
   int labb = annanstans(&krypta, la);
   int* laddning = new int(14289);

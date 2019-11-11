@@ -19,6 +19,7 @@ int main() {
   std::string tydligen("tyska");
   int tysk = allihop(ty, tydligen);
   int u(1);
+  std::cout << "Starting metamatic...\n";
   std::string* udd = new std::string("udde");
   int* udda = advent(u, udd);
   int* uggla = new int(0);
@@ -38,7 +39,7 @@ int main() {
   int* uppfattning = ann(uppe, uppenbarligen);
   int* uppfinningsrikedom = new int(0);
   std::string uppgradering("uppkoppling");
-  int upphandling = anslutningspropp(uppfinningsrikedom, uppgradering);
+  //int upphandling = anslutningspropp(uppfinningsrikedom, uppgradering);
   int upplaga(1);
   std::string* upplysning = new std::string("upprepning");
   int* uppmaning = anskaffning(upplaga, upplysning);
