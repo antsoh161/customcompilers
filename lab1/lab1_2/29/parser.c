@@ -76,7 +76,7 @@ void morefactors ()
 void factor ()
 {
     if (lookahead == '(') {
-        match('('); expr(); match(')');
+        match('('); expr        (); match(')');
     }
     else if (lookahead == ID) {
         int id_lexeme = token_value;
