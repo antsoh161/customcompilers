@@ -18,7 +18,7 @@ int lexan()  /*  lexical analyzer  */
             lineno = lineno + 1;
         else if (isdigit(c)) {  /*  c is a digit  */
             ungetc(c, stdin);
-            scanf("%d", &token_value);
+            scanf("%d", &yylval); /* yylval is the token_value to the bison parser (?) */
             return NUM;
         }
         else if (isalpha(c)) {  /*  c is a letter */

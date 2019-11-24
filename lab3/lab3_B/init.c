@@ -5,7 +5,7 @@
 
 struct symentry keywords[] = {
     { "div", DIV },
-    { "mod", MOD, }
+    { "mod", MOD,}
 };
 
 void init()  /*  loads keywords into symtable  */
