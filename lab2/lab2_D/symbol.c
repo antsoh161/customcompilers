@@ -24,21 +24,27 @@ void push(int token_type, int value){
     top_of_stack++;
     stack[top_of_stack] = entry;
     
+    
 }
 
-int pop(){
+int pop(int from_symtable){
     struct symentry entry;
     if(top_of_stack > -1){
        entry = stack[top_of_stack];
        top_of_stack--;
-       if(entry.token_type== ID)    /* Om entry:et är en identifierare, ta dess värde */
+       if(entry.token_type == ID && from_symtable == 1){    /* Om entry:et är en identifierare, ta dess värde */ 
             return symtable[entry.value].value;
-       else
+       }
+       else{    
              return entry.value;
+       }
     }
-    else
-        error("trying to push from empty stack\n");
+    else{
+        error("trying to pop from empty stack\n");
+        return 0;
+    }
 }
+
 
 
 int insert(char *s, int token_type)    /*  returns position of entry for s */
@@ -47,5 +53,6 @@ int insert(char *s, int token_type)    /*  returns position of entry for s */
         error("Symbol table full");
     symtable[nr_symbols].token_type = token_type;
     symtable[nr_symbols].lexeme = strdup(s);
+    symtable[nr_symbols].value = 0;;
     return nr_symbols++;
 }

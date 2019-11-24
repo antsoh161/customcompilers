@@ -30,7 +30,7 @@ void list()
 }
 
 void assignment() {
-       emit(ID, token_value); match(ID); match('='); expr(); emit('=',token_value);
+           emit(ID, token_value); match(ID); match('='); expr(); emit('=',token_value);
 }
 
 void expr ()

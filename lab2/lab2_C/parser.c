@@ -5,7 +5,7 @@
 int lookahead;
 
 void match(int);
-void start(), list(), expr(), moreterms(), term(), morefactors(), factor(), assignment();
+void start(), list(), expr(), moreterms(), term(), morefactors(), factor(), assignment(), expo(), moreexpo();
 
 void parse()  /*  parses and translates expression list  */
 {	
@@ -79,8 +79,12 @@ void morefactors ()
 
 void factor ()
 {
-    if (lookahead == '(') {
-        match('('); expr        (); match(')');
+    expo(); moreexpo();
+}
+
+void expo(){
+   if (lookahead == '(') {
+        match('('); expr(); match(')');
     }
     else if (lookahead == ID) {
         int id_lexeme = token_value;
@@ -93,7 +97,17 @@ void factor ()
         emit(NUM, num_value);
     }
     else
-        error("syntax error in factor");
+        error("syntax error in expo");
+    
+}
+
+void moreexpo(){
+    if(lookahead == '^'){
+        match('^'); expo(); emit('^',token_value); moreexpo();   
+    }
+    else{
+        /* Empty */
+    }
 }
 
 void match(int t)
