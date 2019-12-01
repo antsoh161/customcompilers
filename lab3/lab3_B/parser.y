@@ -13,6 +13,7 @@ int power(int op2, unsigned int op1);
 %printer {fprintf(yyoutput, "%d", $$);} <>
 
 %token DIV MOD DONE ID NUM
+%right '^'
 %left '*' '/' '%'
 %left '+' '-'
 %left '<' '>'
@@ -23,38 +24,39 @@ int power(int op2, unsigned int op1);
 
 %%
 
-list :    	 assignment ';' list			
+list :    	 assignment	';'	list
 			| expr ';'						{printf("=%d\n",$1);} list
 			| /* Empty */
 			;
 
-assignment :  id '=' expr 			{symtable[$1].value=$3; printf("%s = %d\n",symtable[$1].lexeme,$3);}
+assignment :  id '=' expr 				{symtable[$1].value=$3; printf("%s = %d\n",symtable[$1].lexeme,$3);}
+			  ;
 
-expr :	 	  expr '+' term			{$$ = $1 + $3; printf("+\n");}
-			| expr '-' term			{$$ = $1 - $3; printf("-\n");}
-			| expr '&' term 		{$$ = $1 & $3; printf("&\n");}
-			| expr '|' term			{$$ = $1 | $3; printf("|\n");}
-			| expr '>' term			{$$ = $1 > $3; printf(">\n");}
-			| expr '<' term			{$$ = $1 < $3; printf("<\n");}
-			| expr '?' expr ':' expr	{$$ = $1 ? $3 : $5; printf("=%d\n",$$);}
+expr :	 	  expr '+' term				{$$ = $1 + $3; printf("+\n");}
+			| expr '-' term				{$$ = $1 - $3; printf("-\n");}
+			| expr '&' term 			{$$ = $1 & $3; printf("&\n");}
+			| expr '|' term				{$$ = $1 | $3; printf("|\n");}
+			| expr '>' term				{$$ = $1 >> $3; printf(">\n");}
+			| expr '<' term				{$$ = $1 << $3; printf("<\n");}
+			| expr '?' expr ':' expr %prec '?'	{$$ = $1 ? $3 : $4;}
 			| term						
 			;
 
 term :		  term '*' factor		{$$ = $1 * $3; printf("*\n");}
 			| term '/' factor		{$$ = $1 / $3; printf("/\n");}
 			| term '%' factor		{$$ = $1 % $3; printf("%%\n");} 
-			| factor				
+			| factor
+			;
 				
 factor : 	  factor '^' expo 		{$$ = power($1,$3);printf("^\n");}
-			| expo					
+			| expo	
+			;
 
 expo :	      '(' expr ')'			{$$ = $2;}
-			| id					{$$ = symtable[$1].value; printf("%d",symtable[$1].value);}
+			| id					{$$ = symtable[$1].value; printf("%d\n",symtable[$1].value);}
 			| NUM					{$$ = $1; printf("%d\n", $1);}
-			;
-		
+			;		
 
-			
 id : 		 ID						{$$ = $1; printf("%s\n",symtable[$1].lexeme);}
 			;
 

@@ -13,7 +13,7 @@ lexer.o: 	lexer.c global.h parser.tab.h
 	gcc $(CFLAGS) -c lexer.c
 
 parser.tab.c parser.tab.h: parser.y
-	bison -d parser.y
+	bison -d --debug --verbose parser.y
 
 symbol.o: 	symbol.c global.h
 	gcc $(CFLAGS) -c symbol.c

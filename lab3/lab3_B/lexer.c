@@ -5,7 +5,7 @@
 
 char lexeme[MAX_ID_LENGTH + 1];
 int  lineno = 1;
-int  token_value = NONE; /* Refererar till tokenet själv, till skillnad från symentry.value */
+int  yylval = NONE; /* Refererar till tokenet själv, till skillnad från symentry.value */
 
 int lexan()  /*  lexical analyzer  */
 {
@@ -35,14 +35,14 @@ int lexan()  /*  lexical analyzer  */
             id_number = lookup(lexeme);
             if (id_number == -1)
                 id_number = insert(lexeme, ID);
-            token_value = id_number;
+            yylval = id_number;
             return symtable[id_number].token_type;
         }
         else if (c == EOF){
             return DONE;
         }
         else {
-            token_value = NONE;
+            yylval = NONE;
             return c;
         }
     }
