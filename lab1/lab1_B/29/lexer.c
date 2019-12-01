@@ -9,6 +9,7 @@ int  token_value = NONE;
 
 int lexan()  /*  lexical analyzer  */
 {
+
     int c;
     while(1) {
         c = getchar();
