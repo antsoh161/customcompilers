@@ -1,10 +1,11 @@
 /* init.c */
 
-#include "global.h"
+#include "global.hpp"
+#include "parser.tab.hpp"
 
 struct symentry keywords[] = {
-    { "div", DIV },
-    { "mod", MOD, }
+    {(char*) "div", DIV },
+    {(char*) "mod", MOD,}
 };
 
 void init()  /*  loads keywords into symtable  */
