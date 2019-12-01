@@ -23,8 +23,6 @@ void push(int token_type, int value){
     entry.value = value;
     top_of_stack++;
     stack[top_of_stack] = entry;
-    
-    
 }
 /* För stacken */
 int pop(int from_symtable){

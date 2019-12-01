@@ -2,6 +2,7 @@
 
 #include "global.h"
 
+
 void error(char* message)  /* generates all error messages  */
 {
     fflush(stdout);
