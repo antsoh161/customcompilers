@@ -26,7 +26,6 @@ struct symentry {  /*  form of symbol table entry  */
 };
 
 extern struct symentry symtable[];  /* symbol table  */
-
 extern void init();  /*  loads keywords into symtable  */
 extern void error(char* message);  /*  generates all error messages  */
 extern int lexan();  /*  lexical analyzer  */

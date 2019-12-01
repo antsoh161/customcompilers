@@ -8,7 +8,7 @@ void match(int);
 void start(), list(), expr(), moreterms(), term(), morefactors(), factor(), assignment(), expo(), moreexpo();
 
 void parse()  /*  parses and translates expression list  */
-{	
+{
     lookahead = lexan();
     start();
 }

@@ -6,6 +6,7 @@ char lexeme[MAX_ID_LENGTH + 1];
 int  lineno = 1;
 int  token_value = NONE;
 
+
 int lexan()  /*  lexical analyzer  */
 {
     int c;
