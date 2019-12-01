@@ -10,12 +10,11 @@ int power(int op2, unsigned int op1)
         return power(op2, op1/2)*power(op2, op1/2); 
     else
         return op2*power(op2, op1/2)*power(op2, op1/2); 
-} 
-  
+}
 
 
 int calc(int token_type){
-    int op1 = pop(1);
+    int op1 = pop(1); /*pop(1) betyder att vi tar variabelns värde från symtable */
     int op2 = pop(1);
     
     switch(token_type){
@@ -43,16 +42,12 @@ void emit (int token_type, int token_value)  /*  generates output  */
             printf("%d\n",token_value); push(token_type, token_value);break;
         case ID : 
             printf("%s\n",symtable[token_value].lexeme); push(token_type,token_value);break;
-        case '=' :
+        case '=' : /* Tilldelnings case*/
             printf("%c\n",token_type);
-            int op1 = pop(0); //value of variable
-            int op2 = pop(0); //Variable
+            int op1 = pop(0); 
+            int op2 = pop(0); /* pop(0) betyder att vi tar variabeln själv */
             symtable[op2].value = op1;
             printf("result: %d\n",op1);break;
-            
-           
-            
-            
     default:     
         printf("[Unknown token %d, with value %d]\n", token_type, token_value);
     }

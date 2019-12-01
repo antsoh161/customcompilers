@@ -81,7 +81,7 @@ void factor ()
 {
     expo(); moreexpo();
 }
-
+/* Exponentdelen */
 void expo(){
    if (lookahead == '(') {
         match('('); expr(); match(')');

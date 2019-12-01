@@ -5,7 +5,7 @@
 #define MAX_SYMBOLS 100  /* size of symbol table */
 
 struct symentry symtable[MAX_SYMBOLS];
-struct symentry stack[MAX_SYMBOLS];
+struct symentry stack[MAX_SYMBOLS]; /*Stack för kalkylatorn */
 int nr_symbols = 0;    /* number of symbols in symtable  */
 int top_of_stack = -1; /* tom stack */
 
@@ -16,7 +16,7 @@ int lookup(char *s)         /* returns position of entry for s, or -1 if not fou
             return p;
     return -1;
 }
-
+/* För stacken */
 void push(int token_type, int value){
     struct symentry entry;
     entry.token_type = token_type;
@@ -26,7 +26,7 @@ void push(int token_type, int value){
     
     
 }
-
+/* För stacken */
 int pop(int from_symtable){
     struct symentry entry;
     if(top_of_stack > -1){
