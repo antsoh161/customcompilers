@@ -22,6 +22,7 @@ extern int lineno;
 struct symentry {  /*  form of symbol table entry  */
     char *lexeme; 
     int  token_type;    
+	int value;		/*	för att lagra värden */
 };
 
 extern struct symentry symtable[];  /* symbol table  */
@@ -33,3 +34,5 @@ extern void parse();  /*  parses and translates expression list  */
 extern int insert(char *s, int token_type);    /*  returns position of entry for s */
 extern int lookup(char *s);         /* returns position of entry for s, or -1 if not found */
 extern void emit (int token_type, int token_value);  /*  generates output  */
+extern void push(int token_type, int value);
+extern int pop(int from_symtable);
