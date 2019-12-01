@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define PLUS(x, y) ((x) + (y))
-//#define FACT(n) ( n==0 ? 1 : FACT(n-1)*n) fungerar inte
+#define FACT(n) ( n==0 ? 1 : FACT(n-1)*n) //fungerar inte
 
 
 int factorial(int n) {
@@ -17,7 +17,7 @@ int plus(int x, int y) {
 int main(){
 	int val;
 	int n = 4;
-	val = FACT(n);
+	//val = FACT(n); 
 	printf("%d\n",val);
 	return 0;
 }
