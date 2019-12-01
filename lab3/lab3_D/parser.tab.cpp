@@ -71,7 +71,7 @@
 #define YYERROR_VERBOSE
 #define YYDEBUG 1
 #include <stdio.h>
-#include "global.h"
+#include "global.hpp"
 extern int yyerror(char const *msg);
 extern int yylex();
 extern void parse();
