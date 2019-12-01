@@ -9,6 +9,7 @@ int  token_value = NONE; /* Refererar till tokenet själv, till skillnad från s
 
 int lexan()  /*  lexical analyzer  */
 {
+
     int c;
     while(1) {
         c = getchar();
