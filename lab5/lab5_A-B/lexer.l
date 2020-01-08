@@ -16,8 +16,8 @@ int lookup_helper(char* s);
 %%
 
 [ \t]+			{ /* Ignore Whitspace */}
-[0-9]+			{ token_value = atoi(yytext); yylval = token_value; return NUM;}
-[a-zA-Z_][a-zA-z0-9_]*  { token_value = lookup_helper(yytext); yylval = token_value; return ID;}
+[0-9]+			{ token_value = atoi(yytext); yylval.value = token_value; return NUM;}
+[a-zA-Z_][a-zA-z0-9_]*  { token_value = lookup_helper(yytext); yylval.value = token_value; return ID;}
 
 "("	{return '(';}
 ")"	{return ')';}
@@ -26,7 +26,7 @@ int lookup_helper(char* s);
 "*"	{return '*';}
 "/"	{return '/';}
 "%"	{return '%';}
-"\n"	{lineno++;}
+"\n"	{lineno++;return DONE;}
 "&"	{return '&';}
 "|"	{return '|';}
 "<"	{return '<';}

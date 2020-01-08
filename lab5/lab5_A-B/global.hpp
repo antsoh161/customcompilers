@@ -6,6 +6,7 @@
 #include <string.h> /* ... and for string routines */
 #include "parser.tab.hpp"
 #define MAX_ID_LENGTH  128  /* for the buffer size */
+#define MAX_ARGS 3
 
 #define NONE   -1
 #define EOS    '\0'
@@ -26,6 +27,18 @@ struct symentry {  /*  form of symbol table entry  */
     int  token_type;    
     int value;		/*	för att lagra värden */
 };
+
+struct TreeNode{
+	int type;
+	int leaf_value;
+	TreeNode* args[MAX_ARGS];
+};
+
+typedef struct TreeNode TreeNode;
+
+extern TreeNode* mkleaf(int type, int value);
+extern TreeNode* mknode(int type, TreeNode* a0 = 0, TreeNode* a1 = 0, TreeNode* a2 = 0);
+
 
 extern struct symentry symtable[];  /* symbol table  */
 

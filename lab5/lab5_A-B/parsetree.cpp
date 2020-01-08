@@ -1,5 +1,6 @@
 #define MAX_ARGS 3
 #include <stdio.h>
+
 struct TreeNode{
 	int type;
 	int leaf_value;
