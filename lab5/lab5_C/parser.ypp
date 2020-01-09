@@ -7,6 +7,7 @@
 extern int yyerror(char const *msg);
 extern int yylex();
 int power(int op2, unsigned int op1);
+void printSectionLine();
 void printtree(TreeNode *p);
 void printtree1(TreeNode *p, int level);
 %}
@@ -35,7 +36,7 @@ void printtree1(TreeNode *p, int level);
 
 %%
 
-tree : 			 lists EXEC				{printtree($1);} tree
+tree : 			 lists EXEC				{printSectionLine();printtree($1);printSectionLine();} tree
 			| /*Empty*/
 			;
 
@@ -70,7 +71,7 @@ expr :	 	 	  expr '+' expr				{$$ = mknode('+', $1, $3);}
 			| NUM					{$$ = mkleaf(NUM, $1);}
 			;
 
-id : 			  ID					{$$ = mkleaf(ID,$1);}
+id : 			  ID					{$$ = mkleaf(ID,$<value>1);}
 			;
 
 block :			  list					{$$ = $1;}
@@ -101,6 +102,12 @@ int power(int op2, unsigned int op1)
     else
         return op2*power(op2, op1/2)*power(op2, op1/2); 
 } 
+
+void printSectionLine(){
+        for(int i = 0; i < 100;i++)
+	printf("-");
+        printf("\n");
+}
 
 void printtree(TreeNode *p){
 	printf("Syntax tree:\n");

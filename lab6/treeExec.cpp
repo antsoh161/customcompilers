@@ -3,7 +3,7 @@
 #include "global.hpp"
 
 int calc(int type, int op1, int op2){
-	printf("Calculating %d %c %d\n",op1,type,op2);
+	//printf("Calculating %d %c %d\n",op1,type,op2);
 	switch(type){
 		case '+':
 			return op1 + op2;
