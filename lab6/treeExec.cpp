@@ -55,18 +55,20 @@ int treeExec(TreeNode *p){
 			return calc(p->type,treeExec(p->args[0]),treeExec(p->args[1]));
 		case '=':{
 			int equalto = treeExec(p->args[1]);
-			printf("Setting %s = %d\n", symtable[p->args[0]->leaf_value].lexeme, equalto);
+			printf("\tSetting %s = %d\n", symtable[p->args[0]->leaf_value].lexeme, equalto);
 			symtable[p->args[0]->leaf_value].value = equalto;
 			break;
 		}
 		case IF:
-			if(treeExec(p->args[0])) //Om påståendet är sant, exekvera if-blocket
+			if(treeExec(p->args[0])){ //Om påståendet är sant, exekvera if-blocket
 				treeExec(p->args[1]);
+			}
 			else if(nr_args > 1)	//Om else-satsen existerar
 				treeExec(p->args[2]);
 			break;
-		case ELSE:
-			treeExec(p->args[0]); //Else-satsen block och vi kommer endast hit genom ovanstående else if sats
+		case ELSE: case BLOCK:
+			if(nr_args > 1)
+				treeExec(p->args[0]); //Else-satsen block och vi kommer endast hit genom ovanstående else if sats
 		case WHILE:
 			while(treeExec(p->args[0])){
 				treeExec(p->args[1]); // Medans villkoret är sant, exekvera blocket
@@ -83,4 +85,5 @@ int treeExec(TreeNode *p){
 			break;
 		}
 	}
+	return 0;
 }

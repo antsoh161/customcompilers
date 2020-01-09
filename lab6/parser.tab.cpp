@@ -72,6 +72,7 @@
 #define YYDEBUG 1
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include "global.hpp"
 extern int yyerror(char const *msg);
 extern int yylex();
@@ -80,7 +81,7 @@ void printSectionLine();
 void printtree(TreeNode *p);
 void printtree1(TreeNode *p, int level);
 
-#line 84 "parser.tab.cpp" /* yacc.c:337  */
+#line 85 "parser.tab.cpp" /* yacc.c:337  */
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
 #   if 201103L <= __cplusplus
@@ -139,12 +140,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 30 "parser.ypp" /* yacc.c:352  */
+#line 31 "parser.ypp" /* yacc.c:352  */
 
 	struct TreeNode* p;
 	int value;
 
-#line 148 "parser.tab.cpp" /* yacc.c:352  */
+#line 149 "parser.tab.cpp" /* yacc.c:352  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -449,10 +450,10 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    39,    39,    39,    40,    43,    44,    47,    48,    49,
-      50,    51,    52,    53,    56,    59,    60,    61,    62,    63,
-      64,    65,    66,    67,    68,    69,    70,    71,    74,    77,
-      78
+       0,    40,    40,    40,    41,    44,    45,    48,    49,    50,
+      51,    52,    53,    54,    57,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,    71,    72,    75,    78,
+      79
 };
 #endif
 
@@ -694,183 +695,183 @@ yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
   switch (yytype)
     {
     case 3: /* DIV  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 700 "parser.tab.cpp" /* yacc.c:680  */
+#line 701 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 4: /* MOD  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 706 "parser.tab.cpp" /* yacc.c:680  */
+#line 707 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 5: /* DONE  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 712 "parser.tab.cpp" /* yacc.c:680  */
+#line 713 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 8: /* LIST  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 718 "parser.tab.cpp" /* yacc.c:680  */
+#line 719 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 9: /* PRINT  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 724 "parser.tab.cpp" /* yacc.c:680  */
+#line 725 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 10: /* READ  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 730 "parser.tab.cpp" /* yacc.c:680  */
+#line 731 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 11: /* WHILE  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 736 "parser.tab.cpp" /* yacc.c:680  */
+#line 737 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 12: /* IF  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 742 "parser.tab.cpp" /* yacc.c:680  */
+#line 743 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 13: /* ELSE  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 748 "parser.tab.cpp" /* yacc.c:680  */
+#line 749 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 14: /* BLOCK  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 754 "parser.tab.cpp" /* yacc.c:680  */
+#line 755 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 15: /* EXEC  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 760 "parser.tab.cpp" /* yacc.c:680  */
+#line 761 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 16: /* '^'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 766 "parser.tab.cpp" /* yacc.c:680  */
+#line 767 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 17: /* '*'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 772 "parser.tab.cpp" /* yacc.c:680  */
+#line 773 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 18: /* '/'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 778 "parser.tab.cpp" /* yacc.c:680  */
+#line 779 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 19: /* '%'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 784 "parser.tab.cpp" /* yacc.c:680  */
+#line 785 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 20: /* '+'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 790 "parser.tab.cpp" /* yacc.c:680  */
+#line 791 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 21: /* '-'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 796 "parser.tab.cpp" /* yacc.c:680  */
+#line 797 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 22: /* '<'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 802 "parser.tab.cpp" /* yacc.c:680  */
+#line 803 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 23: /* '>'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 808 "parser.tab.cpp" /* yacc.c:680  */
+#line 809 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 24: /* '&'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 814 "parser.tab.cpp" /* yacc.c:680  */
+#line 815 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 25: /* '|'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 820 "parser.tab.cpp" /* yacc.c:680  */
+#line 821 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 26: /* '?'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 826 "parser.tab.cpp" /* yacc.c:680  */
+#line 827 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 27: /* '='  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 832 "parser.tab.cpp" /* yacc.c:680  */
+#line 833 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 28: /* ';'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 838 "parser.tab.cpp" /* yacc.c:680  */
+#line 839 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 29: /* '('  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 844 "parser.tab.cpp" /* yacc.c:680  */
+#line 845 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 30: /* ')'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 850 "parser.tab.cpp" /* yacc.c:680  */
+#line 851 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 31: /* ':'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 856 "parser.tab.cpp" /* yacc.c:680  */
+#line 857 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 32: /* '{'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 862 "parser.tab.cpp" /* yacc.c:680  */
+#line 863 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 33: /* '}'  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 868 "parser.tab.cpp" /* yacc.c:680  */
+#line 869 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
     case 35: /* tree  */
-#line 16 "parser.ypp" /* yacc.c:680  */
+#line 17 "parser.ypp" /* yacc.c:680  */
       {fprintf(yyoutput, "%d", (*yyvaluep));}
-#line 874 "parser.tab.cpp" /* yacc.c:680  */
+#line 875 "parser.tab.cpp" /* yacc.c:680  */
         break;
 
       default:
@@ -1475,163 +1476,163 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 39 "parser.ypp" /* yacc.c:1652  */
+#line 40 "parser.ypp" /* yacc.c:1652  */
     {printSectionLine();printtree((yyvsp[-1].p));printSectionLine();treeExec((yyvsp[-1].p));}
-#line 1481 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1482 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 5:
-#line 43 "parser.ypp" /* yacc.c:1652  */
+#line 44 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode(LIST, (yyvsp[-1].p), (yyvsp[0].p));}
-#line 1487 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1488 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 6:
-#line 44 "parser.ypp" /* yacc.c:1652  */
+#line 45 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = 0;}
-#line 1493 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1494 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 8:
-#line 48 "parser.ypp" /* yacc.c:1652  */
+#line 49 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1499 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1500 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 9:
-#line 49 "parser.ypp" /* yacc.c:1652  */
+#line 50 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode(IF, (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1505 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1506 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 10:
-#line 50 "parser.ypp" /* yacc.c:1652  */
+#line 51 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode(IF, (yyvsp[-4].p), (yyvsp[-2].p),mknode(ELSE, (yyvsp[0].p)));}
-#line 1511 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1512 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 11:
-#line 51 "parser.ypp" /* yacc.c:1652  */
+#line 52 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode(WHILE,(yyvsp[-2].p), (yyvsp[0].p));}
-#line 1517 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1518 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 12:
-#line 52 "parser.ypp" /* yacc.c:1652  */
+#line 53 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode(PRINT,(yyvsp[-2].p));}
-#line 1523 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1524 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 13:
-#line 53 "parser.ypp" /* yacc.c:1652  */
+#line 54 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode(READ,(yyvsp[-2].p));}
-#line 1529 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1530 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 14:
-#line 56 "parser.ypp" /* yacc.c:1652  */
+#line 57 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('=',(yyvsp[-2].p),(yyvsp[0].p));}
-#line 1535 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1536 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 15:
-#line 59 "parser.ypp" /* yacc.c:1652  */
+#line 60 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('+', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1541 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1542 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 16:
-#line 60 "parser.ypp" /* yacc.c:1652  */
+#line 61 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('-', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1547 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1548 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 17:
-#line 61 "parser.ypp" /* yacc.c:1652  */
+#line 62 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('&', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1553 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1554 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 18:
-#line 62 "parser.ypp" /* yacc.c:1652  */
+#line 63 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('|', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1559 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1560 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 19:
-#line 63 "parser.ypp" /* yacc.c:1652  */
+#line 64 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('>', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1565 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1566 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 20:
-#line 64 "parser.ypp" /* yacc.c:1652  */
+#line 65 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('<', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1571 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1572 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 21:
-#line 65 "parser.ypp" /* yacc.c:1652  */
+#line 66 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('?', (yyvsp[-4].p), (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1577 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1578 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 22:
-#line 66 "parser.ypp" /* yacc.c:1652  */
+#line 67 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('*', (yyvsp[-2].p), (yyvsp[0].p)); }
-#line 1583 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1584 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 23:
-#line 67 "parser.ypp" /* yacc.c:1652  */
+#line 68 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('/', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1589 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1590 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 24:
-#line 68 "parser.ypp" /* yacc.c:1652  */
+#line 69 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mknode('%', (yyvsp[-2].p), (yyvsp[0].p));}
-#line 1595 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1596 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 25:
-#line 69 "parser.ypp" /* yacc.c:1652  */
+#line 70 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1601 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1602 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 26:
-#line 70 "parser.ypp" /* yacc.c:1652  */
+#line 71 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = (yyvsp[0].p);}
-#line 1607 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1608 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 27:
-#line 71 "parser.ypp" /* yacc.c:1652  */
+#line 72 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mkleaf(NUM, (yyvsp[0].value));}
-#line 1613 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1614 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 28:
-#line 74 "parser.ypp" /* yacc.c:1652  */
+#line 75 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = mkleaf(ID,(yyvsp[0].value));}
-#line 1619 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1620 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 29:
-#line 77 "parser.ypp" /* yacc.c:1652  */
+#line 78 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = (yyvsp[0].p);}
-#line 1625 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1626 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
   case 30:
-#line 78 "parser.ypp" /* yacc.c:1652  */
+#line 79 "parser.ypp" /* yacc.c:1652  */
     {(yyval.p) = (yyvsp[-1].p);}
-#line 1631 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1632 "parser.tab.cpp" /* yacc.c:1652  */
     break;
 
 
-#line 1635 "parser.tab.cpp" /* yacc.c:1652  */
+#line 1636 "parser.tab.cpp" /* yacc.c:1652  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1862,7 +1863,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 81 "parser.ypp" /* yacc.c:1918  */
+#line 82 "parser.ypp" /* yacc.c:1918  */
 
 
 int yyerror(char const *msg) {
@@ -1895,8 +1896,13 @@ void printSectionLine(){
 }
 
 void printtree(TreeNode *p){
-	printf("Syntax tree:\n");
-	printtree1(p,0);
+	printf("Show syntax tree? Y/N\n");
+	char n;
+	std::cin >> n;
+	if(n == 'Y' || n == 'y'){
+		printf("Syntax tree:\n");
+		printtree1(p,0);
+	}
 }
 
 void printtree1(TreeNode *p,int level){
