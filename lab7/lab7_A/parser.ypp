@@ -1,0 +1,384 @@
+%{
+#define YYERROR_VERBOSE
+#define YYDEBUG 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include "global.hpp"
+extern int yyerror(char const *msg);
+extern int yylex();
+int power(int op2, unsigned int op1);
+void printSectionLine();
+void printtree(TreeNode *p);
+void printtree1(TreeNode *p, int level);
+void build_stack_from_tree(TreeNode *p);
+void build_stack_from_tree2(TreeNode *p,bool left);
+StackMachine sm;
+%}
+
+%debug
+%printer {fprintf(yyoutput, "%d", $$);} <>
+
+%token DIV MOD DONE ID NUM LIST PRINT READ WHILE IF ELSE BLOCK EXEC
+%right '^'
+%left '*' '/' '%'
+%left '+' '-'
+%left '<' '>'
+%left '&'
+%left '|'
+%right '?'
+%right '='
+%nonassoc IF
+%nonassoc ELSE
+
+%union {
+	struct TreeNode* p;
+	int value;
+}
+%type <p> list lists expr id assignment block;
+%type <value> ID NUM
+
+%%
+
+tree : 			 lists EXEC				{printSectionLine();printtree($1);printSectionLine(); /*treeExec($1);*/ build_stack_from_tree($1);return 0;} tree
+			| /*Empty*/
+			;
+
+lists : 		 list lists				{$$ = mknode(LIST, $1, $2);}
+			| /* Empty */				{$$ = 0;}
+			;
+
+list :    		  assignment	';'
+			| expr ';'				{$$ = $1;}
+			| IF '(' expr ')' block %prec IF			{$$ = mknode(IF, $3, $5);}
+			| IF '(' expr ')' block ELSE block	{$$ = mknode(IF, $3, $5,mknode(ELSE, $7));}
+			| WHILE '(' expr ')' block		{$$ = mknode(WHILE,$3, $5);}
+			| PRINT '(' expr ')' ';'		{$$ = mknode(PRINT,$3);}
+			| READ	'(' id ')' ';'			{$$ = mknode(READ,$3);}
+			;
+
+assignment :  id '=' expr					{$$ = mknode('=',$1,$3);}
+			  ;
+
+expr :	 	 	  expr '+' expr				{$$ = mknode('+', $1, $3);}
+			| expr '-' expr				{$$ = mknode('-', $1, $3);}
+			| expr '&' expr				{$$ = mknode('&', $1, $3);}
+			| expr '|' expr				{$$ = mknode('|', $1, $3);}
+			| expr '>' expr				{$$ = mknode('>', $1, $3);}
+			| expr '<' expr				{$$ = mknode('<', $1, $3);}
+			| expr '?' expr ':' expr %prec '?'	{$$ = mknode('?', $1, $3, $5);}
+			| expr '*' expr				{$$ = mknode('*', $1, $3); }
+			| expr '/' expr				{$$ = mknode('/', $1, $3);}
+			| expr '%' expr				{$$ = mknode('%', $1, $3);}
+			| '(' expr ')'				{$$ = $2;}
+			| id					{$$ = $1;}
+			| NUM					{$$ = mkleaf(NUM, $1);}
+			;
+
+id : 			  ID					{$$ = mkleaf(ID,$<value>1);}
+			;
+
+block :			  list					{$$ = $1;}
+			| '{' lists '}'				{$$ = $2;}//{$$ = mknode(BLOCK, $2);}
+			;
+
+%%
+
+int yyerror(char const *msg) {
+    error(msg);
+    return 0;
+}
+
+void parse(){
+	yyparse();
+}
+/*
+int yylex(){
+	return lexan();
+}
+*/
+int power(int op2, unsigned int op1)
+{
+    if (op1 == 0)
+        return 1;
+    else if (op1%2 == 0)
+        return power(op2, op1/2)*power(op2, op1/2);
+    else
+        return op2*power(op2, op1/2)*power(op2, op1/2);
+}
+
+void printSectionLine(){
+        for(int i = 0; i < 100;i++)
+	printf("-");
+        printf("\n");
+}
+
+void printtree(TreeNode *p){
+	printf("Show syntax tree? Y/N\n");
+	char n;
+	std::cin >> n;
+	if(n == 'Y' || n == 'y'){
+		printf("Syntax tree:\n");
+		printtree1(p,0);
+	}
+}
+
+void printtree1(TreeNode *p,int level){
+	if(p == 0){
+		return;
+	}
+	switch(p->type){
+		case ID:
+			printf("%*s",2*level,"");
+			printf("%s\n", symtable[p->leaf_value].lexeme);
+			break;
+		case NUM:
+			printf("%*s",2*level,"");
+			printf("%d\n", p->leaf_value);
+			break;
+		case '+':
+			printf("%*s",2*level,"");
+			printf("+\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '-':
+			printf("%*s",2*level,"");
+			printf("-\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '&':
+			printf("%*s",2*level,"");
+			printf("&\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '|':
+			printf("%*s",2*level,"");
+			printf("|\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+
+		case '<':
+			printf("%*s",2*level,"");
+			printf("<\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '>':
+			printf("%*s",2*level,"");
+			printf(">\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '?':
+			printf("%*s",2*level,"");
+			printf("?:\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			printtree1(p->args[2],level+1);
+			break;
+		case '*':
+			printf("%*s",2*level,"");
+			printf("*\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '/':
+			printf("%*s",2*level,"");
+			printf("*\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+		case '%':
+			printf("%*s",2*level,"");
+			printf("%%\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+
+		case '=':
+			printf("%*s",2*level,"");
+			printf("=\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+
+		case LIST:
+			printf("%*s",2*level,"");
+			printf("list\n");
+			printtree1(p->args[0],level+1);
+			printtree1(p->args[1],level+1);
+			break;
+
+		case IF:
+			printf("%*s",2*level,"");
+                        printf("if\n");
+                        printtree1(p->args[0],level+1);
+                        printtree1(p->args[1],level+1);
+			printtree1(p->args[2],level+1);
+			break;
+		case ELSE:
+			printf("%*s",2*level,"");
+                        printf("else\n");
+                        printtree1(p->args[0],level+1);
+			break;
+
+		case WHILE:
+			printf("%*s",2*level,"");
+                        printf("while\n");
+                        printtree1(p->args[0],level+1);
+                        printtree1(p->args[1],level+1);
+			break;
+
+		case READ:
+			printf("%*s",2*level,"");
+			printf("read\n");
+			printtree1(p->args[0],level+1);
+			break;
+
+		case PRINT:
+			printf("%*s",2*level,"");
+			printf("print\n");
+			printtree1(p->args[0],level+1);
+			break;
+	}
+}
+void build_stack_from_tree(TreeNode *p){
+	printf("Do you want to convert this tree into a stack? Y/N\n");
+	char n;
+	std::cin >> n;
+	if(n == 'Y' || n == 'y'){
+				build_stack_from_tree2(p,false);
+				sm.append(Instruction(halt));
+				sm.showstate();
+				sm.list_program();
+				try{
+					sm.run();
+				}
+				catch(Exception& e){
+					std::cout << "*** Exception caught: " << e.message() << std::endl;
+	        sm.showstate();
+	        sm.list_program();
+				}
+				sm.showstate();
+		}
+}
+// Rekursiv funktion som bygger stacken utifrån trädet
+// left håller håll på om inkommande noder är lvalues eller rvalues
+void build_stack_from_tree2(TreeNode *p,bool left){
+		if(p == 0){
+			return;
+		}
+		switch(p->type){
+			case NUM:
+				sm.append(Instruction(push,p->leaf_value));
+				break;
+			case ID:
+				if(left){
+					sm.append(Instruction(lvalue,p->leaf_value));
+					printf("Sending Lvalue %s\n",symtable[p->leaf_value].lexeme);
+				}
+				else{
+					sm.append(Instruction(rvalue,p->leaf_value));
+					printf("Sending Rvalue %s\n",symtable[p->leaf_value].lexeme);
+				}
+				break;
+			case '+':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(plus));
+				break;
+			case '-':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(minus));
+			case '&':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(stackop_and));
+				break;
+			case '|':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(stackop_or));
+				break;
+			case '<':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(le));
+				break;
+			case '>':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(ge));
+				break;
+			case '?':
+				build_stack_from_tree2(p->args[0],false);
+				sm.append(Instruction(gofalse,1)); //Go to Label 1 if statement is false
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(label,1));			//Label 1 = Ternary-Else-Start
+				build_stack_from_tree2(p->args[2],false);
+				break;
+			case '*':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(times));
+				break;
+			case '/':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(divide));
+				break;
+			case '%':
+				build_stack_from_tree2(p->args[0],false);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(modulo));
+				break;
+			case '=':
+				build_stack_from_tree2(p->args[0],true);
+				build_stack_from_tree2(p->args[1],false);
+				sm.append(Instruction(assign));
+				break;
+			case LIST:
+				build_stack_from_tree2(p->args[0],false); //Go left
+				build_stack_from_tree2(p->args[1],false); //Go right
+				break;
+			case IF:
+					build_stack_from_tree2(p->args[0],false); //Condition
+					sm.append(Instruction(gofalse,2));
+					build_stack_from_tree2(p->args[1],false); // If
+
+					sm.append(Instruction(label,2)); //Label 2 is Else-Starting
+					build_stack_from_tree2(p->args[2],false); // Else
+
+				break;
+			case ELSE:
+				build_stack_from_tree2(p->args[0],false); //If controls the labels
+				break;
+
+			case WHILE:
+				sm.append(Instruction(label,3)); //Label 3 is While-Start
+				build_stack_from_tree2(p->args[0],false); //Condition
+				sm.append(Instruction(gofalse,4)); // Label 4 is After-While
+				build_stack_from_tree2(p->args[1],false); //Inside while
+				sm.append(Instruction(jump,3)); // Jump back to beginning of while loop after it ends
+				sm.append(Instruction(label,4)); // After-While
+				build_stack_from_tree2(p->args[2],false);
+				break;
+
+			case READ:
+				build_stack_from_tree2(p->args[0],false);
+				sm.append(Instruction(stackop_read));
+				break;
+
+			case PRINT:
+				build_stack_from_tree2(p->args[0],false);
+				sm.append(Instruction(stackop_write));
+				break;
+
+		}
+
+}
